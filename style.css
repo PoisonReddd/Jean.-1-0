@@ -380,6 +380,84 @@ body {
   .glow-text {
     font-size: 1.4em;
   }
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
 
+  .futuristic-section {
+    padding: 20px 10px;
+    max-width: 100%;
+  }
+
+  #terminal {
+    width: 95%;
+    font-size: 14px;
+  }
+
+  #enter-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .glow-text {
+    font-size: 1.5em;
+  }
+
+  .typing-text {
+    font-size: 1em;
+  }
+
+  .robo-img {
+    width: 100px;
+  }
+
+  .track-button {
+    font-size: 0.85em;
+    padding: 8px 12px;
+  }
+
+  .terminal-carta {
+    max-width: 95%;
+    font-size: 1em;
+  }
+
+  #music-player {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  #player-container iframe {
+    height: 80px;
+  }
+
+  #toggle-stars {
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.8em;
+    padding: 6px 10px;
+  }
+
+  .menu-terminal a {
+    display: block;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 400px) {
+  #enter-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .glow-text {
+    font-size: 1.3em;
+  }
+
+  .status-panel {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
 
 
