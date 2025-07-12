@@ -1,0 +1,89 @@
+<html lang="pt-br">    
+<head>    
+  <meta charset="UTF-8" />    
+  <meta name="viewport" content="width=device-width, initial-scale=1" />    
+  <title>JEAN 1.0</title>    
+  <link rel="stylesheet" href="style.css" />    
+</head>    
+<body>    
+  <canvas id="star-canvas"></canvas>    
+  <button id="toggle-stars" class="neon-button toggle-stars">Estrelas</button>    
+
+  <!-- Menu -->    
+  <nav class="menu-terminal hidden" id="menu">    
+    <a href="#terminal-container">Início</a>    
+    <a href="#next-section">Núcleo</a>    
+    <a href="#robo-section">Robô</a>    
+    <a href="#music-section">Trilha Sonora</a>    
+    <a href="#mensagem-section">Mensagem</a>  
+    <a href="#error-section">Error:404</a>  
+  </nav>    
+
+  <!-- Terminal -->    
+  <div id="terminal-container">    
+    <div id="terminal"></div><span class="cursor"></span>    
+    <button id="enter-btn" onclick="enterSystem()">Entrar no sistema</button>    
+  </div>    
+
+  <!-- Núcleo -->    
+  <section id="next-section" class="futuristic-section">    
+    <h2 class="glow-text">Núcleo Emocional Ativo</h2>    
+    <p class="typing-text"></p>    
+    <div class="status-panel">    
+      <pre>
+Status do sistema:    
+- Amor: 100%    
+- Paixão: 100%    
+- Confiança: 100%    
+- Saudade: 100%    
+- Conexão: Estável    
+      </pre>    
+    </div>    
+    <button class="neon-button" onclick="mostrarRobo()">Acessar Robô</button>    
+  </section>    
+
+  <!-- Robô -->    
+  <section id="robo-section" class="futuristic-section">    
+    <h2 class="glow-text">Robô Conector</h2>    
+    <img src="img/robo" alt="Robô Conector" class="robo-img" />    
+    <p id="frase" class="frase-terminal">Você ainda domina minha mente.</p>    
+    <button class="neon-button" onclick="trocarFrase()">Nova mensagem</button>    
+    <button class="neon-button" onclick="mostrarTrilha()">Explorar Memórias</button>    
+  </section>    
+
+  <!-- Trilha Sonora -->    
+  <section id="music-section" class="futuristic-section">    
+    <h2 class="glow-text">Trilha Sonora Emocional</h2>    
+    <p class="music-desc">Meu coração pulsa na mesma frequência.</p>    
+    <div id="playlist-container"></div>    
+    <div id="music-player">    
+      <h3 id="track-title">Carregando...</h3>    
+      <div id="player-container"></div>    
+      <button class="neon-button" onclick="nextTrack()">Próxima música</button>    
+    </div>    
+  </section>    
+
+  <!-- Mensagem Secreta -->    
+  <section id="mensagem-section" class="futuristic-section">    
+    <h2 class="glow-text">Mensagem Secreta do Coração</h2>    
+    <div id="carta-digitada" class="terminal-carta"></div>    
+    <button class="neon-button" onclick="iniciarCarta()">Ler mensagem secreta</button>    
+  </section>    
+
+  <!-- Página de Error:404 -->    
+  <section id="error-section" class="futuristic-section hidden" style="padding: 60px 20px;">    
+    <h1 class="error-code">ERROR:404</h1>
+    <p>Esse caminho ainda não está liberado, volte e crie mais memórias com a administradora.</p>    
+    <button class="neon-button" onclick="reiniciarSistema()">Reiniciar Sistema</button>
+  </section> 
+
+  <!-- Sons -->
+  <audio id="type-sound" src="https://www.soundjay.com/keyboard/sounds/keyboard-1.mp3" preload="auto"></audio>
+  <audio id="glitch-sound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+  <!-- Scripts -->
+  <script src="https://www.youtube.com/iframe_api"></script>    
+  <script src="script.js"></script>    
+</body>    
+</html>
+
