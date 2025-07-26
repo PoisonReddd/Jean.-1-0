@@ -370,7 +370,7 @@ body {
   }
 }
 
-/* === AJUSTES ADICIONAIS PARA CELULAR === */
+/* === AJUSTES GERAIS PARA CELULAR === */
 @media (max-width: 480px) {
   body {
     font-size: 15px;
@@ -383,7 +383,7 @@ body {
   }
 
   .robo-img {
-    width: 100px;
+    width: 80px;
   }
 
   .neon-button,
@@ -426,5 +426,66 @@ body {
 
   .fragmento-card {
     width: 100%;
+  }
+}
+
+/* === AJUSTES DO NÚCLEO EMOCIONAL === */
+#robo-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+#robo-section .frase-terminal {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  padding: 10px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+#robo-section .neon-button {
+  width: auto;
+  min-width: 120px;
+  margin: 8px;
+  font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  #robo-section .neon-button {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 10px auto;
+  }
+
+  #robo-section .frase-terminal {
+    font-size: 1rem;
+  }
+}
+
+/* === MENU TERMINAL NO CELULAR === */
+@media (max-width: 480px) {
+  .menu-terminal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 5px;
+  }
+
+  .menu-terminal a {
+    margin: 6px 0;
+    font-size: 1rem;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border: 1px solid #00ff00;
+    border-radius: 6px;
+  }
+
+  .menu-terminal a:hover {
+    background-color: #00ff00;
+    color: #000;
   }
 }
