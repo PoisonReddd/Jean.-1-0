@@ -16,13 +16,15 @@ body {
   padding: 15px;
   text-align: center;
   border-bottom: 1px solid #00ff00;
+  flex-wrap: wrap;
 }
 
 .menu-terminal a {
   color: #00ff00;
-  margin: 0 15px;
+  margin: 0 10px;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1rem;
 }
 
 .menu-terminal a:hover {
@@ -33,7 +35,7 @@ body {
 }
 
 #terminal-container {
-  padding: 40px;
+  padding: 40px 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -44,7 +46,7 @@ body {
 #terminal {
   background: #111;
   padding: 20px;
-  width: 80%;
+  width: 90%;
   max-width: 700px;
   margin-bottom: 20px;
   box-shadow: 0 0 20px #00ff00;
@@ -171,6 +173,7 @@ body {
   max-width: 700px;
   margin: auto;
   text-align: center;
+  padding: 0 20px;
 }
 
 #track-title {
@@ -336,7 +339,7 @@ body {
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
   .glow-text {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
 
   .fragmento-card .frase {
@@ -349,6 +352,25 @@ body {
 
   .fragmentos-container {
     gap: 25px;
+  }
+
+  .menu-terminal a {
+    display: block;
+    margin: 10px auto;
+    font-size: 0.95rem;
+  }
+
+  #terminal {
+    font-size: 16px;
+  }
+
+  .robo-img {
+    width: 120px;
+  }
+
+  .neon-button {
+    padding: 10px 20px;
+    font-size: 0.9em;
   }
 }
 
@@ -368,88 +390,21 @@ body {
   .fragmento-card .explicacao {
     font-size: 0.9rem;
   }
-}
 
-
-/* === CORREÇÃO DE TEXTO CORTADO NA FRASE "CONECTANDO..." EM TELAS PEQUENAS === */
-@media (max-width: 768px) {
-  .typing-text {
-    white-space: normal !important;
-    overflow: visible !important;
-    word-break: break-word;
-  }
-}
-
-/* === RESTAURAÇÃO DOS BOTÕES AO ESTILO ORIGINAL === */
-
-/* Estilo dos links do menu */
-.menu-terminal a {
-  display: inline-block;
-  margin: 0 15px;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #00ff00;
-  text-decoration: none;
-}
-
-.menu-terminal a:hover {
-  background-color: #00ff00;
-  color: #000;
-  padding: 4px 8px;
-  border-radius: 6px;
-}
-
-/* Botões neon padrão (usados em várias partes) */
-.neon-button,
-.track-button {
-  background: transparent;
-  border: 2px solid #00ff00;
-  color: #00ff00;
-  padding: 12px 24px;
-  font-weight: bold;
-  font-family: 'Courier New', monospace;
-  cursor: pointer;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #00ff00;
-  margin: 6px;
-  transition: background 0.3s, color 0.3s;
-  font-size: 1rem;
-}
-
-.neon-button:hover,
-.track-button:hover {
-  background: #00ff00;
-  color: #000;
-}
-
-/* Botão "Enter" com mesmo estilo */
-#enter-btn {
-  padding: 12px 24px;
-  background: transparent;
-  border: 2px solid #00ff00;
-  color: #00ff00;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: 'Courier New', monospace;
-  box-shadow: 0 0 10px #00ff00;
-}
-
-#enter-btn:hover {
-  background: #00ff00;
-  color: #000;
-}
-
-@media (max-width: 600px) {
-  .menu-terminal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+  #terminal {
+    font-size: 15px;
+    padding: 16px;
   }
 
-  .menu-terminal a {
-    display: block;
-    margin: 5px 0;
+  .neon-button {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+
+  #toggle-stars {
+    bottom: 12px;
+    right: 12px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
   }
 }
