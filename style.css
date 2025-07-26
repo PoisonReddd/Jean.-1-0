@@ -11,7 +11,6 @@ body {
   display: none;
 }
 
-/* ===== MENU ===== */
 .menu-terminal {
   background-color: #000;
   padding: 15px;
@@ -33,7 +32,6 @@ body {
   border-radius: 6px;
 }
 
-/* ===== TERMINAL ===== */
 #terminal-container {
   padding: 40px;
   min-height: 100vh;
@@ -86,7 +84,6 @@ body {
   color: #000;
 }
 
-/* ===== SEÇÕES FUTURISTAS ===== */
 .futuristic-section {
   display: none;
   text-align: center;
@@ -133,7 +130,6 @@ body {
   margin-right: auto;
 }
 
-/* ===== BOTÕES NEON ===== */
 .neon-button {
   background: transparent;
   border: 2px solid #00ff00;
@@ -153,7 +149,6 @@ body {
   color: #000;
 }
 
-/* ===== ROBÔ ===== */
 .robo-img {
   width: 140px;
   max-width: 50%;
@@ -172,7 +167,6 @@ body {
   margin: 20px 0;
 }
 
-/* ===== MÚSICA ===== */
 #music-player {
   max-width: 700px;
   margin: auto;
@@ -225,7 +219,6 @@ body {
   color: #000;
 }
 
-/* ===== CARTA TERMINAL ===== */
 .terminal-carta {
   background: #111;
   padding: 20px;
@@ -247,7 +240,6 @@ body {
   padding-bottom: 100px;
 }
 
-/* ===== ESTRELAS ===== */
 #toggle-stars {
   position: fixed;
   bottom: 20px;
@@ -280,7 +272,7 @@ body {
   background: transparent;
 }
 
-/* ===== FRAGMENTOS DE AMOR ===== */
+/* === FRAGMENTOS DE AMOR === */
 #fragmentos-section {
   padding: 60px 20px;
 }
@@ -323,13 +315,11 @@ body {
   font-style: italic;
   margin-bottom: 8px;
   line-height: 1.5;
-  color: #ffffff;
 }
 
 .fragmento-card .autor {
   font-size: 0.95rem;
   opacity: 0.7;
-  color: #ffffff;
 }
 
 .fragmento-card .explicacao {
@@ -343,7 +333,7 @@ body {
   color: #cfd6ff;
 }
 
-/* ===== RESPONSIVO ===== */
+/* === RESPONSIVO === */
 @media (max-width: 768px) {
   .glow-text {
     font-size: 1.7rem;
@@ -363,19 +353,6 @@ body {
 }
 
 @media (max-width: 480px) {
-  .menu-terminal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .menu-terminal a {
-    display: block;
-    margin: 6px 0;
-    font-size: 1rem;
-  }
-
   .glow-text {
     font-size: 1.4rem;
   }
@@ -390,5 +367,64 @@ body {
 
   .fragmento-card .explicacao {
     font-size: 0.9rem;
+  }
+}
+
+/* === AJUSTES ADICIONAIS PARA CELULAR === */
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
+
+  #terminal {
+    padding: 15px;
+    font-size: 16px;
+    width: 90%;
+  }
+
+  .robo-img {
+    width: 100px;
+  }
+
+  .neon-button,
+  .track-button {
+    padding: 10px 14px;
+    font-size: 0.9em;
+  }
+
+  .typing-text {
+    font-size: 1em;
+  }
+
+  .status-panel {
+    padding: 15px;
+    font-size: 0.95em;
+  }
+
+  .futuristic-section {
+    padding: 30px 15px;
+  }
+
+  .terminal-carta {
+    padding: 15px;
+    font-size: 1em;
+    max-width: 95%;
+  }
+
+  #music-player {
+    padding: 0 10px;
+  }
+
+  #player-container iframe {
+    height: 70px;
+  }
+
+  #toggle-stars {
+    font-size: 0.8em;
+    padding: 8px 14px;
+  }
+
+  .fragmento-card {
+    width: 100%;
   }
 }
