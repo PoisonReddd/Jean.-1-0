@@ -219,6 +219,8 @@ const playlist = [
   { title: "Post Malone ft. Ozzy Osbourne, Travis Scott - Take What You Want", id: "LYa_ReqRlcs" },
   { title: "Ozzy Osbourne - No More Tears", id: "CprfjfN5PRs" },
   { title: "Goo Goo Dolls - Iris", id: "NdYWuo9OFAw" },
+  { title: "System of a Down - Lonely Day", id: "DnGdoEa1tPg" },
+
 ];
 
 let currentTrackIndex = 0;
