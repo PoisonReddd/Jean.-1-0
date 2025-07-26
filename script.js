@@ -15,6 +15,7 @@ const cartaDigitada = document.getElementById('carta-digitada');
 const toggleStarsBtn = document.getElementById('toggle-stars');
 const errorSection = document.getElementById('error-section');
 const errorMessage = document.getElementById('error-message');
+const fragmentosSection = document.getElementById('fragmentos-section'); // Nova seção
 
 // === Terminal Inicial ===
 const lines = [
@@ -55,7 +56,6 @@ function enterSystem() {
   typeNextSectionText();
 }
 
-// === Texto do Núcleo ===
 function typeNextSectionText() {
   const typingElem = document.querySelector('.typing-text');
   const text = "Processando sentimentos... Conectando coração à rede...";
@@ -133,8 +133,8 @@ const frases = [
   "Reprogramaria o mundo só pra te ter por perto.",
   "Amor em alta definição: você.",
   "Você é meu imprint eterno, mesmo se renascermos em mil   servidores diferentes.",
-"No meio da escuridão de Aberration, você foi minha luz bioluminescente.",
-"Não importa o mapa, meu ponto de respawn favorito sempre será ao seu lado."
+  "No meio da escuridão de Aberration, você foi minha luz bioluminescente.",
+  "Não importa o mapa, meu ponto de respawn favorito sempre será ao seu lado."
 ];
 
 let ultimaFrase = "";
@@ -148,14 +148,15 @@ function trocarFrase() {
   document.getElementById("frase").textContent = nova;
 }
 
-// === Seções para Navegação ===
+// === Seções ===
 const sections = {
   'terminal-container': terminalContainer,
   'next-section': nextSection,
   'robo-section': roboSection,
   'music-section': musicSection,
   'mensagem-section': mensagemSection,
-  'error-section': errorSection
+  'error-section': errorSection,
+  'fragmentos-section': fragmentosSection // <-- Adicionada
 };
 
 document.querySelectorAll('#menu a').forEach(link => {
@@ -163,7 +164,6 @@ document.querySelectorAll('#menu a').forEach(link => {
     event.preventDefault();
     const targetId = this.getAttribute('href').substring(1);
 
-    // Oculta todas as seções
     Object.values(sections).forEach(sec => {
       if (sec === terminalContainer) {
         sec.style.display = 'none';
@@ -172,7 +172,6 @@ document.querySelectorAll('#menu a').forEach(link => {
       }
     });
 
-    // Mostra a seção certa
     if (targetId === 'terminal-container') {
       terminalContainer.style.display = 'flex';
       toggleStarsBtn.style.display = 'none';
@@ -205,14 +204,21 @@ const playlist = [
   { title: "The Neighbourhood - Little Death", id: "LVqGRJLEj28" },
   { title: "Damiano - Zombie Lady", id: "LP2nqXYwl6Q" },
   { title: "Chris Grey - lifetime", id: "R6B0cnduVWE" },
-  { title: "Chris Grey - Burn the world", id: "SkcO47UDzzY" },
-  { title: "Fuji Kaze - Shinunoga e wa", id: "dawrQnvwMTY" },
+  { title: "Chris Grey - Burn The World", id: "SkcO47UDzzY" },
+  { title: "Fuji Kaze - Shinunoga E Wa", id: "dawrQnvwMTY" },
   { title: "Guns N' Roses - Sweet Child O'Mine", id: "1w7OgIMMRc4" },
   { title: "Avenged Sevenfold - Gunslinger", id: "cdKyzzm465Q" },
   { title: "Guns N' Roses - This I Love", id: "vhvP905I-aQ" },
-{ title: "Slayer - Raining Blood", id: "CkaE237oiwE" },
-{ title: "AudioSlave - Like a Stone", id: "7QU1nvuxaMA" },
-
+  { title: "Slayer - Raining Blood", id: "CkaE237oiwE" },
+  { title: "AudioSlave - Like a Stone", id: "7QU1nvuxaMA" },
+  { title: "Sombr - Undressed", id: "z0wT6CrEGY" },
+  { title: "Luisa Sonza - Iguaria", id: "Y9KY4s8lIHA" },
+  { title: "Venere Vai Venus - Anjos", id: "mJjHVOv2bWI" },
+  { title: "Artic Monkeys - I Wanna Be Yours", id: "nyuo9-OjNNg" },
+  { title: "Lana Del Rey - Young And Beautiful", id: "o_1aF54DO60" },
+  { title: "Post Malone ft. Ozzy Osbourne, Travis Scott - Take What You Want", id: "LYa_ReqRlcs" },
+  { title: "Ozzy Osbourne - No More Tears", id: "CprfjfN5PRs" },
+  { title: "Goo Goo Dolls - Iris", id: "NdYWuo9OFAw" },
 ];
 
 let currentTrackIndex = 0;
@@ -267,13 +273,17 @@ function nextTrack() {
 }
 
 // === Carta Secreta ===
-const textoCarta = `Há momentos na vida que parecem transcendentes, que tocam o mais profundo da nossa existência. Lembro exatamente do instante em que nossos olhares se cruzaram pela primeira vez, como se, naquele breve segundo, tivesse me feito sentir que existo novamente. Não foi um simples olhar. Foi um encontro de almas, algo que não se explica com palavras, mas que se sente com cada fibra do corpo e da alma. Como se, de repente, algo dentro de mim, algo que estava escondido ou adormecido, voltasse a se acender.
+const textoCarta = `Nunca fui boa em descrever o que sinto, muito menos em demonstrar. Mas com você, tudo flui de maneira tão leve que sinto a necessidade de expressar meu amor de forma incondicional — como se nunca houvesse momentos suficientes para isso. E talvez não haja mesmo, porque qualquer demonstração de amor parece pequena diante da grandiosidade que é te amar.
 
-Não sei se o amor é um destino ou uma escolha, mas sei que há algo inegável e inexplicável na maneira como nos encontramos. O que eu entendo é que, talvez, o amor não seja algo que buscamos ativamente, mas algo que simplesmente acontece, como uma força natural do universo. Como um rio que, por mais que mude seu curso, sempre encontra o oceano. Talvez o que sentimos agora seja apenas o começo de algo que transcende o tempo, algo que se constrói sem pressa, mas com uma profundidade que não se pode medir.
+Não sou uma pessoa devota, tampouco religiosa. Nunca fui alguém que fantasiava com uma terra prometida. Na verdade, sempre desejei que não existisse nada após a morte — muito menos um paraíso. Sempre acreditei que a essência do ser humano pertence ao real, e não ao irreal que se veste de pureza. Mas, quando penso em você, tudo isso muda. Só desejo que exista uma outra vida, um outro plano... para que eu nunca precise me despedir de você. Você é o mais próximo de um paraíso que eu poderia ter, porque me faz sentir como se eu já estivesse em um. E se, por acaso, realmente existir um paraíso em outro plano — e você não estiver lá — então nunca será um paraíso.
 
-Nos momentos que passamos juntos, percebo que o amor, de fato, não é apenas a soma de gestos e palavras. Ele é também o silêncio, a contemplação, o simples fato de estar ao lado de alguém que nos permite ser nós mesmos, sem máscaras. Algo que vai além do entendimento racional, e que só faz sentido no coração.
+Desde o momento em que você surgiu, é como se eu tivesse uma doença que não cessa — apenas se fortalece. Tudo o que antes parecia chato se tornou aceitável. Depois, essencial. O que era esquisito ficou bonito aos meus olhos. E o que era complicado se transformou em um obstáculo pequeno, quase invisível. Tudo ganhou mais cor, como se a existência de um novo dia passasse a ter um sentido justificável.
 
-Eu sei que ainda estamos começando a desvendar o que somos um para o outro, mas me sinto grata por ter te encontrado, por sentir que, de alguma forma, nossas existências se cruzaram na hora exata, como se tudo tivesse sido preparado para esse momento, você é meu fio vermelho do amor..`;
+Eu soube que havia algo no instante em que olhei nos seus olhos e consegui enxergar a minha própria existência. No momento em que desejei que o tempo parasse — e não que ele passasse mais rápido. Quando fechei os olhos e senti que existia um lugar de conforto no mundo. Como num jogo, senti que tinha dado spawn no seu abraço.
+
+Às vezes penso que, em algum lugar, existe mesmo o fio vermelho do destino — e que, desde sempre, o meu estava amarrado ao seu. E por isso, cada dia que passa, cresce em mim a vontade de ser melhor, de ser alguém que esteja à altura de tudo o que você é, porque amar você me dá vontade de evoluir, de ser uma versão mais bonita de mim mesma.
+
+Eu te amo e amo o fato de você transformar todos os meus planos em nossos planos. Amo acordar e meu primeiro pensamento ser você, e encerrar o meu dia continuando sendo você. Amo cada parte do seu ser. E às vezes me pego pensando que, mesmo te dando tudo o que tenho, o amor que sinto por você ainda transborda… e dói um pouco saber que nunca vou conseguir colocar em palavras de maneira digna o quanto você significa pra mim.`;
 
 function iniciarCarta() {
   const senha = prompt("Digite a senha para acessar a mensagem secreta:");
