@@ -16,15 +16,13 @@ body {
   padding: 15px;
   text-align: center;
   border-bottom: 1px solid #00ff00;
-  flex-wrap: wrap;
 }
 
 .menu-terminal a {
   color: #00ff00;
-  margin: 0 10px;
+  margin: 0 15px;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1rem;
 }
 
 .menu-terminal a:hover {
@@ -35,7 +33,7 @@ body {
 }
 
 #terminal-container {
-  padding: 40px 20px;
+  padding: 40px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -46,7 +44,7 @@ body {
 #terminal {
   background: #111;
   padding: 20px;
-  width: 90%;
+  width: 80%;
   max-width: 700px;
   margin-bottom: 20px;
   box-shadow: 0 0 20px #00ff00;
@@ -173,7 +171,6 @@ body {
   max-width: 700px;
   margin: auto;
   text-align: center;
-  padding: 0 20px;
 }
 
 #track-title {
@@ -339,7 +336,7 @@ body {
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
   .glow-text {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 
   .fragmento-card .frase {
@@ -352,25 +349,6 @@ body {
 
   .fragmentos-container {
     gap: 25px;
-  }
-
-  .menu-terminal a {
-    display: block;
-    margin: 10px auto;
-    font-size: 0.95rem;
-  }
-
-  #terminal {
-    font-size: 16px;
-  }
-
-  .robo-img {
-    width: 120px;
-  }
-
-  .neon-button {
-    padding: 10px 20px;
-    font-size: 0.9em;
   }
 }
 
@@ -390,21 +368,12 @@ body {
   .fragmento-card .explicacao {
     font-size: 0.9rem;
   }
+}
 
-  #terminal {
-    font-size: 15px;
-    padding: 16px;
-  }
-
-  .neon-button {
-    font-size: 0.85rem;
-    padding: 8px 16px;
-  }
-
-  #toggle-stars {
-    bottom: 12px;
-    right: 12px;
-    padding: 8px 14px;
-    font-size: 0.8rem;
+@media (max-width: 768px) {
+  .typing-text {
+    white-space: normal;
+    overflow: visible;
+    word-break: break-word;
   }
 }
