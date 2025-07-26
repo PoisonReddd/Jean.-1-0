@@ -370,10 +370,72 @@ body {
   }
 }
 
+
+/* === CORREÇÃO DE TEXTO CORTADO NA FRASE "CONECTANDO..." EM TELAS PEQUENAS === */
 @media (max-width: 768px) {
   .typing-text {
-    white-space: normal;
-    overflow: visible;
+    white-space: normal !important;
+    overflow: visible !important;
     word-break: break-word;
   }
+}
+
+/* === RESTAURAÇÃO DOS BOTÕES AO ESTILO ORIGINAL === */
+
+/* Estilo dos links do menu */
+.menu-terminal a {
+  display: inline-block;
+  margin: 0 15px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #00ff00;
+  text-decoration: none;
+}
+
+.menu-terminal a:hover {
+  background-color: #00ff00;
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* Botões neon padrão (usados em várias partes) */
+.neon-button,
+.track-button {
+  background: transparent;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00ff00;
+  margin: 6px;
+  transition: background 0.3s, color 0.3s;
+  font-size: 1rem;
+}
+
+.neon-button:hover,
+.track-button:hover {
+  background: #00ff00;
+  color: #000;
+}
+
+/* Botão "Enter" com mesmo estilo */
+#enter-btn {
+  padding: 12px 24px;
+  background: transparent;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+#enter-btn:hover {
+  background: #00ff00;
+  color: #000;
 }
