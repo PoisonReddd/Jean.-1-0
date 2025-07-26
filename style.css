@@ -1,3 +1,4 @@
+
 body {
   background-color: #000;
   color: #00ff00;
@@ -236,19 +237,15 @@ body {
   overflow-y: auto;
 }
 
-/* Espaço extra na seção da carta */
 #mensagem-section {
   padding-bottom: 100px;
 }
 
-/* Botão do céu estrelado */
 #toggle-stars {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  transform: none;
-  z-index: 100;
-  display: block;
+  z-index: 1000;
   background-color: #000000cc;
   padding: 10px 18px;
   font-size: 0.9em;
@@ -265,7 +262,6 @@ body {
   color: #000;
 }
 
-/* Canvas do céu estrelado */
 #star-canvas {
   position: fixed;
   top: 0;
@@ -273,191 +269,471 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 50;
-  display: none;
+  z-index: 10;
   background: transparent;
 }
 
-/* ==== ERROR 404 ==== */
-.error-container {
-  background-color: #000;
-  color: #00aaff;
-  font-family: 'Courier New', monospace;
-  min-height: 100vh;
-  padding: 5vh 10vw;
+/* === FRAGMENTOS DE AMOR === */
+#fragmentos-section {
+  padding: 60px 20px;
+}
+
+#fragmentos-section h2 {
+  margin-bottom: 10px;
+}
+
+#fragmentos-section .music-desc {
+  margin-bottom: 40px;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.fragmentos-container {
   display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.fragmento-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fragmento-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+.fragmento-card .frase {
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fragmento-card .autor {
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+.fragmento-card .explicacao {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-top: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  color: #cfd6ff;
+}
+
+/* === CRONÔMETRO === */
+#cronometro-section {
+  padding: 60px 20px;
+}
+
+#cronometro {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+/* === RESPONSIVO === */
+@media (max-width: 768px) {
+  .glow-text {
+    font-size: 1.7rem;
+  }
+  #cronometro {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glow-text {
+    font-size: 1.4rem;
+  }
+  #cronometro {
+    font-size: 1.3rem;
+  }
+}
+
+body {
+  background-color: #000;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.menu-terminal {
+  background-color: #000;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #00ff00;
+}
+
+.menu-terminal a {
+  color: #00ff00;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu-terminal a:hover {
+  background-color: #00ff00;
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+#terminal-container {
+  padding: 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+}
+
+#terminal {
+  background: #111;
+  padding: 20px;
+  width: 80%;
+  max-width: 700px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px #00ff00;
+  border-radius: 10px;
+  font-size: 18px;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1em;
+  background: #00ff00;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+#enter-btn {
+  display: none;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: transparent;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#enter-btn:hover {
+  background: #00ff00;
+  color: #000;
+}
+
+.futuristic-section {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid #00ff00;
+  border-bottom: 1px solid #00ff00;
+  max-width: 900px;
+  margin: auto;
+}
+
+.futuristic-section.active {
+  display: block;
+}
+
+.glow-text {
+  font-size: 2em;
+  text-shadow: 0 0 8px #00ff00;
+  margin-bottom: 20px;
+}
+
+.typing-text {
+  font-size: 1.2em;
+  border-right: 2px solid #00ff00;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink-caret 1s step-end infinite;
+}
+
+@keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.status-panel {
+  background: #001100;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  box-shadow: inset 0 0 10px #00ff00;
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.neon-button {
+  background: transparent;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00ff00;
+  margin: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.neon-button:hover {
+  background: #00ff00;
+  color: #000;
+}
+
+.robo-img {
+  width: 140px;
+  max-width: 50%;
+  animation: flutuar 3s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes flutuar {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.frase-terminal {
+  font-size: 1.2em;
+  margin: 20px 0;
+}
+
+#music-player {
+  max-width: 700px;
+  margin: auto;
   text-align: center;
 }
 
-.error-container h1 {
-  font-size: 4rem;
-  animation: glitch 1s infinite;
+#track-title {
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 
-.error-container p {
-  font-size: 1.5rem;
-  margin: 1rem 0;
-  opacity: 0.8;
+#player-container iframe {
+  width: 100%;
+  height: 90px;
+  border: none;
+  border-radius: 8px;
 }
 
-.glitch-text {
-  animation: glitch-text 2s infinite;
+.music-desc {
+  margin-bottom: 20px;
+  font-style: italic;
+  font-size: 1.1em;
+  color: #00ff00cc;
 }
 
-@keyframes glitch {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-2px); }
-  40% { transform: translateX(2px); }
-  60% { transform: translateX(-1px); }
-  80% { transform: translateX(1px); }
-  100% { transform: translateX(0); }
+#playlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-@keyframes glitch-text {
-  0% { opacity: 1; }
-  25% { opacity: 0.3; transform: scale(1.01); }
-  50% { opacity: 0.6; transform: scale(0.99); }
-  75% { opacity: 0.2; transform: scale(1.02); }
-  100% { opacity: 1; }
+.track-button {
+  background: transparent;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 10px 16px;
+  font-size: 0.95em;
+  font-family: 'Courier New', monospace;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 6px #00ff00;
+  transition: all 0.3s ease;
 }
 
-/* ==== RESPONSIVO ==== */
+.track-button:hover {
+  background: #00ff00;
+  color: #000;
+}
+
+.terminal-carta {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1em;
+  color: #00ff00;
+  white-space: pre-wrap;
+  text-align: left;
+  max-width: 700px;
+  margin: 20px auto;
+  min-height: 200px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+#mensagem-section {
+  padding-bottom: 100px;
+}
+
+#toggle-stars {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #000000cc;
+  padding: 10px 18px;
+  font-size: 0.9em;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  border: 2px solid #00ff00;
+  border-radius: 8px;
+  box-shadow: 0 0 6px #00ff00;
+  cursor: pointer;
+}
+
+#toggle-stars:hover {
+  background-color: #00ff00;
+  color: #000;
+}
+
+#star-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+  background: transparent;
+}
+
+/* === FRAGMENTOS DE AMOR === */
+#fragmentos-section {
+  padding: 60px 20px;
+}
+
+#fragmentos-section h2 {
+  margin-bottom: 10px;
+}
+
+#fragmentos-section .music-desc {
+  margin-bottom: 40px;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.fragmentos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.fragmento-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fragmento-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+.fragmento-card .frase {
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fragmento-card .autor {
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+.fragmento-card .explicacao {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-top: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  color: #cfd6ff;
+}
+
+/* === RESPONSIVO === */
 @media (max-width: 768px) {
-  #terminal {
-    width: 95%;
-    font-size: 16px;
-  }
-
-  #enter-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-
-  .futuristic-section {
-    padding: 30px 10px;
-    max-width: 100%;
-  }
-
   .glow-text {
-    font-size: 1.6em;
+    font-size: 1.7rem;
   }
 
-  .robo-img {
-    width: 110px;
+  .fragmento-card .frase {
+    font-size: 1.1rem;
   }
 
-  #music-player {
-    max-width: 95%;
+  .fragmento-card .explicacao {
+    font-size: 0.95rem;
   }
 
-  .track-button {
-    font-size: 0.85em;
-    padding: 8px 12px;
-  }
-
-  .terminal-carta {
-    font-size: 1em;
-    max-width: 95%;
-  }
-
-  #toggle-stars {
-    bottom: 15px;
-    right: 15px;
-    padding: 8px 14px;
-    font-size: 0.85em;
+  .fragmentos-container {
+    gap: 25px;
   }
 }
 
-@media (max-width: 400px) {
-  #enter-btn {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
+@media (max-width: 480px) {
   .glow-text {
-    font-size: 1.4em;
-  }
-@media (max-width: 768px) {
-  body {
-    font-size: 16px;
+    font-size: 1.4rem;
   }
 
-  .futuristic-section {
-    padding: 20px 10px;
-    max-width: 100%;
+  .fragmento-card {
+    padding: 15px;
   }
 
-  #terminal {
-    width: 95%;
-    font-size: 14px;
+  .fragmento-card .frase {
+    font-size: 1rem;
   }
 
-  #enter-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-
-  .glow-text {
-    font-size: 1.5em;
-  }
-
-  .typing-text {
-    font-size: 1em;
-  }
-
-  .robo-img {
-    width: 100px;
-  }
-
-  .track-button {
-    font-size: 0.85em;
-    padding: 8px 12px;
-  }
-
-  .terminal-carta {
-    max-width: 95%;
-    font-size: 1em;
-  }
-
-  #music-player {
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  #player-container iframe {
-    height: 80px;
-  }
-
-  #toggle-stars {
-    bottom: 10px;
-    right: 10px;
-    font-size: 0.8em;
-    padding: 6px 10px;
-  }
-
-  .menu-terminal a {
-    display: block;
-    margin: 10px 0;
+  .fragmento-card .explicacao {
+    font-size: 0.9rem;
   }
 }
-
-@media (max-width: 400px) {
-  #enter-btn {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  .glow-text {
-    font-size: 1.3em;
-  }
-
-  .status-panel {
-    padding: 10px;
-    font-size: 14px;
-  }
-}
-
-
