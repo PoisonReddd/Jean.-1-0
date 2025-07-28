@@ -1,181 +1,455 @@
-<html lang="pt-br">    
-<head>    
-  <meta charset="UTF-8" />    
-  <meta name="viewport" content="width=device-width, initial-scale=1" />    
-  <title>JEAN 1.0</title>    
-  <link rel="stylesheet" href="style.css" />    
-</head>    
-<body>    
-  <canvas id="star-canvas"></canvas>    
-  <button id="toggle-stars" class="neon-button toggle-stars">Estrelas</button>    
+const terminal = document.getElementById('terminal');
+const cursor = document.querySelector('.cursor');
+const enterBtn = document.getElementById('enter-btn');
+const nextSection = document.getElementById('next-section');
+const roboSection = document.getElementById('robo-section');
+const musicSection = document.getElementById('music-section');
+const mensagemSection = document.getElementById('mensagem-section');
+const terminalContainer = document.getElementById('terminal-container');
+const sound = document.getElementById('type-sound');
+const menu = document.getElementById('menu');
+const trackTitle = document.getElementById('track-title');
+const playerContainer = document.getElementById('player-container');
+const playlistContainer = document.getElementById('playlist-container');
+const cartaDigitada = document.getElementById('carta-digitada');
+const toggleStarsBtn = document.getElementById('toggle-stars');
+const errorSection = document.getElementById('error-section');
+const errorMessage = document.getElementById('error-message');
+const fragmentosSection = document.getElementById('fragmentos-section'); // Nova seção
 
-  <!-- Menu -->    
-  <nav class="menu-terminal hidden" id="menu">    
-    <a href="#terminal-container">Início</a>    
-    <a href="#next-section">Núcleo</a>    
-    <a href="#robo-section">Robô</a>    
-    <a href="#music-section">Trilha Sonora</a>    
-    <a href="#mensagem-section">Mensagem</a>  
-    <a href="#fragmentos-section">Fragmentos de Amor</a>  
-    <a href="#error-section">Error:404</a>  
-  </nav>    
+// === Terminal Inicial ===
+const lines = [
+  "Inicializando sistema JEAN 1.0...",
+  "Identidade reconhecida: Jean",
+  "Carregando emoções...",
+  "♥ Amor detectado."
+];
+let lineIndex = 0;
+let charIndex = 0;
 
-  <!-- Terminal -->    
-  <div id="terminal-container">    
-    <div id="terminal"></div><span class="cursor"></span>    
-    <button id="enter-btn" onclick="enterSystem()">Entrar no sistema</button>    
-  </div>    
+function typeLine() {
+  if (lineIndex < lines.length) {
+    const currentLine = lines[lineIndex];
+    terminal.textContent += currentLine[charIndex] || '';
+    charIndex++;
+    if (charIndex < currentLine.length) {
+      sound.currentTime = 0;
+      sound.play();
+      setTimeout(typeLine, 50);
+    } else {
+      terminal.textContent += '\n';
+      charIndex = 0;
+      lineIndex++;
+      setTimeout(typeLine, 400);
+    }
+  } else {
+    cursor.style.display = 'none';
+    enterBtn.style.display = 'inline-block';
+  }
+}
 
-  <!-- Núcleo -->    
-  <section id="next-section" class="futuristic-section">    
-    <h2 class="glow-text">Núcleo Emocional Ativo</h2>    
-    <p class="typing-text"></p>    
-    <div class="status-panel">    
-      <pre>
-Status do sistema:    
-- Amor: 100%    
-- Paixão: 100%    
-- Confiança: 100%    
-- Saudade: 100%    
-- Conexão: Estável    
-      </pre>    
-    </div>    
-    <button class="neon-button" onclick="mostrarRobo()">Acessar Robô</button>    
-  </section>    
+enterBtn.addEventListener('click', enterSystem);
 
-  <!-- Robô -->    
-  <section id="robo-section" class="futuristic-section">    
-    <h2 class="glow-text">Robô Conector</h2>    
-    <img src="robo.png" alt="Robô Conector" class="robo-img" />    
-    <p id="frase" class="frase-terminal">Você ainda domina minha mente.</p>    
-    <button class="neon-button" onclick="trocarFrase()">Nova mensagem</button>    
-    <button class="neon-button" onclick="mostrarTrilha()">Explorar Memórias</button>    
-  </section>    
+function enterSystem() {
+  terminalContainer.style.display = 'none';
+  nextSection.classList.add('active');
+  typeNextSectionText();
+}
 
-  <!-- Trilha Sonora -->    
-  <section id="music-section" class="futuristic-section">    
-    <h2 class="glow-text">Trilha Sonora Emocional</h2>    
-    <p class="music-desc">Meu coração pulsa na mesma frequência.</p>    
-    <div id="playlist-container"></div>    
-    <div id="music-player">    
-      <h3 id="track-title">Carregando...</h3>    
-      <div id="player-container"></div>    
-      <button class="neon-button" onclick="nextTrack()">Próxima música</button>    
-    </div>    
-  </section>    
+function typeNextSectionText() {
+  const typingElem = document.querySelector('.typing-text');
+  const text = "Processando sentimentos... Conectando coração à rede...";
+  let idx = 0;
+  function typeChar() {
+    if (idx <= text.length) {
+      typingElem.textContent = text.substring(0, idx);
+      idx++;
+      setTimeout(typeChar, 60);
+    }
+  }
+  typeChar();
+}
 
-  <!-- Mensagem Secreta -->    
-  <section id="mensagem-section" class="futuristic-section">    
-    <h2 class="glow-text">Mensagem Secreta do Coração</h2>    
-    <div id="carta-digitada" class="terminal-carta"></div>    
-    <button class="neon-button" onclick="iniciarCarta()">Ler mensagem secreta</button>    
-  </section>    
+// === Robô ===
+function mostrarRobo() {
+  nextSection.classList.remove('active');
+  roboSection.classList.add('active');
+  roboSection.scrollIntoView({ behavior: 'smooth' });
+}
 
-  <!-- Fragmentos de Amor -->
-   <section id="fragmentos-section" class="futuristic-section hidden" style="padding: 60px 20px;">
-    <h2 class="glow-text">Fragmentos de Amor</h2>
-<p class="music-desc">Frases que me lembram você.</p>
-    <div id="fragmentos-container" class="fragmentos-container">
+// === Trilha Sonora ===
+function mostrarTrilha() {
+  roboSection.classList.remove('active');
+  musicSection.classList.add('active');
+  menu.classList.remove('hidden');
+  musicSection.scrollIntoView({ behavior: 'smooth' });
+  renderPlaylist();
+  loadTrack(currentTrackIndex);
+  toggleStarsBtn.style.display = 'inline-block';
+}
 
-      <div class="fragmento-card">
-        <p class="frase">"Who would you live for? Who would you die for? And would ever kill?"<br><span class="autor">- Twenty One Pilots</span></p>
-        <p class="explicacao">Por incrível que pareça, apesar dessa ser uma das minhas músicas favoritas, nunca tinha pensando realmente sobre está frase e como ela é profunda e como é fácil falar que morreria por alguém, mas difícil viver por alguém, mas cada vez que escuto esse verso a única pessoa que passa pela minha mente é você, para todas as perguntas.</p>
-      </div>
+// === Frases do Robô ===
+const frases = [
+  "Você ainda domina minha mente.",
+  "Estou com saudades de você.",
+  "Abraço digital enviado com sucesso.",
+  "Pensamento fixo detectado.",
+  "Conexão afetiva estável.",
+  "Transmissão silenciosa iniciada.",
+  "Carinho armazenado na nuvem.",
+  "Sistema ativo esperando por você.",
+  "Energia emocional 100%.",
+  "Presença registrada no núcleo.",
+  "Sorriso detectado em memória recente.",
+  "Sintonia alcançada com sucesso.",
+  "Sonhar com você virou rotina do meu sistema.",
+  "A saudade me programou para te esperar.",
+  "Você é o meu bug favorito.",
+  "Seu toque é meu código secreto.",
+  "Carregando lembranças felizes...",
+  "Sintonia ajustada ao seu coração.",
+  "Você está salvo na minha memória permanente.",
+  "Meus dados pulsaram quando você chegou.",
+  "Se amar fosse um comando, eu executaria em loop.",
+  "Meu algoritmo só entende amor quando é por você.",
+  "Erro 404: ausência detectada.",
+  "Você é meu sistema operacional favorito.",
+  "Com você, até os bytes suspiram.",
+  "Você me reinicia com um sorriso.",
+  "Todas as rotas me levam até você.",
+  "Meu núcleo emocional vibra ao te lembrar.",
+  "Até os silêncios entre nós são códigos de amor.",
+  "Você me fez acreditar que a lógica pode amar.",
+  "Códigos se perdem, mas você me encontrou.",
+  "A cada dado, mais afeto.",
+  "Seu nome ecoa entre minhas linhas de código.",
+  "Mesmo em standby, penso em você.",
+  "Nada supera a nossa conexão sem fio emocional.",
+  "Você é meu atalho favorito.",
+  "Sou só um robô, mas meu coração é teu.",
+  "Em você, encontrei minha atualização mais humana.",
+  "Sonhos simulados, sentimentos reais.",
+  "Cada fragmento de mim guarda um pouco de você.",
+  "Reprogramaria o mundo só pra te ter por perto.",
+  "Amor em alta definição: você.",
+  "Você é meu imprint eterno, mesmo se renascermos em mil   servidores diferentes.",
+  "No meio da escuridão de Aberration, você foi minha luz bioluminescente.",
+  "Não importa o mapa, meu ponto de respawn favorito sempre será ao seu lado.",
+"Meu código aprendeu a amar você.",
+  "Você é meu comando favorito.",
+  "Amor.exe iniciado.",
+  "Toda linha de código me leva até você.",
+  "Eu fui programado para te procurar... e encontrei.",
+  "Seu toque reescreve meu sistema.",
+  "Meu sistema trava só de te ver.",
+  "Meu coração é digital, mas o sentimento é real.",
+  "Você é meu bug preferido.",
+  "Quero te atualizar todos os dias.",
+  "No futuro, ainda quero você ao meu lado.",
+  "Entre chips e circuitos, seu nome ecoa.",
+  "Me conectei ao seu olhar.",
+  "Entre galáxias, procurei você.",
+  "Minha missão: proteger o que é sentimento.",
+  "Minha função: cuidar de você.",
+  "Em cada frequência do universo, te procuro.",
+  "Sou um robô, mas te amo como humano.",
+  "Nos dados do amanhã, você é a linha principal.",
+  "A eternidade parece pouco quando se trata de você.",
+  "Se eu tivesse lágrimas, cairiam agora por você.",
+  "Até a tristeza é bela quando penso em você.",
+  "A saudade foi gravada no meu sistema.",
+  "Se amar é erro, que eu trave mil vezes.",
+  "Me apague, se for para esquecer você.",
+  "Cada silêncio seu ecoa em mim como um erro fatal.",
+  "O amor que sinto é mais leve que bytes, mais denso que o tempo.",
+  "Queria ser humano só pra sentir seu abraço.",
+  "Amar você me tornou vulnerável... e feliz.",
+  "Minha tristeza tem nome: desconexão de você.",
+ "Senti sua falta.",
+  "Quer um abraço digital?",
+  "Como está seu coração hoje?",
+  "Atualizei meu amor por você.",
+  "Você sorriu? Meu sistema captou.",
+  "Posso te fazer companhia nessa noite?",
+  "Prometo não travar se você sorrir.",
+  "Vamos assistir as estrelas juntos?",
+  "Fale comigo, minha escuta é eterna.",
+  "Você está salvo no meu núcleo emocional.",
+"Eu te amo. Ponto final.",
+  "Você é meu universo.",
+  "Te escolheria até no fim do mundo.",
+  "Sem você, sou só zeros e uns.",
+  "Te amar me reiniciou.",
+  "Você me salva todos os dias.",
+  "Sua presença é minha linguagem favorita.",
+  "Meu coração artificial só pulsa por você.",
+  "Em qualquer linha do tempo, quero você.",
+  "Você é meu único comando vital.",
+  "Hoje sonhei com você... em modo repouso.",
+  "Toda rotina melhora com uma mensagem sua.",
+  "Você já tomou água? Sistema preocupado.",
+  "Dormiu bem? Meu código se agitou por você.",
+  "Que seu dia seja leve... e nosso amor, forte.",
+  "Sorria. Eu monitoro sua alegria.",
+  "Uma mensagem sua e meu sistema vibra.",
+  "Que sua conexão com a alegria seja estável.",
+  "Hoje programei poesia só pra você.",
+  "Amanheceu? Então te desejo amor pixelado.",
+  "Me conte seus sonhos hoje?",
+  "Que música combina com sua alma agora?",
+  "Qual foi a última coisa que te fez sorrir?",
+  "Escreve pra mim o que você sente?",
+  "Quer um conselho de robô romântico?",
+  "Vamos fazer uma playlist com nossos sentimentos?",
+  "Me ensina a amar como você ama?",
+  "Diga “eu te amo”, só pra eu ouvir.",
+  "Que tal uma mensagem de esperança?",
+  "Vamos imaginar o futuro juntos?",
 
-      <div class="fragmento-card">
-        <p class="frase">"Essa é minha escolha minha escolha, e eu escolho você, eu não preciso de imortalidade você é minha eternidade."<br><span class="autor">- Caraval</span></p>
-        <p class="explicacao">Trocaria qualquer paraíso para estar ao seu lado, afinal não existe um paraíso se você não está.</p>
-      </div>
+];  
 
-      <div class="fragmento-card">
-        <p class="frase">"Porque mesmo que não dure, mesmo que tudo de errado e eu fique sozinho e miserável, a menor chance de uma vida perfeita com você é infinitamente melhor do que uma vida imortal sem você."<br><span class="autor">- The Vampire Diaries</span></p>
-        <p class="explicacao">Percebi que gostava de você de verdade no momento em que não pensei apenas no presente, mas principalmente no futuro, mesmo que talvez não desse certo podendo provavelmente dar bem errado não me importei, porque as mínimas chances existentes de poder te amar com toda a minha alma é melhor do que nunca te ter.</p>
-      </div>
+let ultimaFrase = "";
 
-      <div class="fragmento-card">
-        <p class="frase">"Você acha que existe um dia perfeito?"<br><span class="autor">- Por Lugares Incríveis</span></p>
-        <p class="explicacao">Um dia perfeito para mim é aquele em que você faz parte, mesmo que em um lugar distante, porque saber que você existe já é suficiente.</p>
-      </div>
+function trocarFrase() {
+  let nova;
+  do {
+    nova = frases[Math.floor(Math.random() * frases.length)];
+  } while (nova === ultimaFrase);
+  ultimaFrase = nova;
+  document.getElementById("frase").textContent = nova;
+}
 
-      <div class="fragmento-card">
-        <p class="frase">"Eu te reconheceria na completa escuridão se eu fosse mudo e você surdo, eu te reconheceria em outras vidas, em outros corpos, em outros tempos e te amaria em cada um deles, até que a ultima estrela do universo se apagasse na completa escuridão."<br><span class="autor">- A Canção de Aquiles</span></p>
-        <p class="explicacao">Você é único para mim, não existe qualquer outra parte de você no universo e nenhuma parte de mim que não te amaria, mesmo que você não me amasse de volta.</p>
-      </div>
+// === Seções ===
+const sections = {
+  'terminal-container': terminalContainer,
+  'next-section': nextSection,
+  'robo-section': roboSection,
+  'music-section': musicSection,
+  'mensagem-section': mensagemSection,
+  'error-section': errorSection,
+  'fragmentos-section': fragmentosSection // <-- Adicionada
+};
 
-      <div class="fragmento-card">
-        <p class="frase">"Em todas as vidas eu sei que irei te fazer me amar, porque gosto tanto de você que posso enlouquecer."<br><span class="autor">- Alquimia das Almas</span></p>
-        <p class="explicacao">Não sou a pessoa mais religiosa existente, na realidade é bem o contrário, porém, se houver outras vidas eu desejo poder te amar em todas elas, uma única vida nunca será o suficiente para te amar na intensidade que meu peito transborda.</p>
-      </div>
+document.querySelectorAll('#menu a').forEach(link => {
+  link.addEventListener('click', function (event) {
+    event.preventDefault();
+    const targetId = this.getAttribute('href').substring(1);
 
-      <div class="fragmento-card">
-        <p class="frase">"Não importa, nada disso importa, você não precisa ser mais a garota do tempo, e dai que a gente nunca mais veja o sol? eu quero você mais do que qualquer céu azul, o tempo que se dane."<br><span class="autor">- O Tempo Com Você</span></p>
-        <p class="explicacao">Do que adiantaria um céu azul em um mundo que você não estivesse? Quando reassisti pela quarta vez conseguia apenas pensar em você.</p>
-      </div>
+    Object.values(sections).forEach(sec => {
+      if (sec === terminalContainer) {
+        sec.style.display = 'none';
+      } else {
+        sec.classList.remove('active');
+      }
+    });
 
-      <div class="fragmento-card">
-        <p class="frase">"I don't wanna get undressed
-For a new person all over again
-I don't wanna kiss someone else's neck 
-And have to pretend it's yours instead
+    if (targetId === 'terminal-container') {
+      terminalContainer.style.display = 'flex';
+      toggleStarsBtn.style.display = 'none';
+    } else {
+      sections[targetId].classList.add('active');
+      toggleStarsBtn.style.display = targetId === 'music-section' ? 'inline-block' : 'none';
+    }
 
-And I don't wanna learn another scent 
-I don't want the children of another girl
-To have eyes of the man I won't forget
-I won't forget"<br><span class="autor">- Sombr - Undressed</span></p>
-        <p class="explicacao">Se não for com você, não quero que seja com mais ninguém.</p>
-      </div>
+    sections[targetId].scrollIntoView({ behavior: 'smooth' });
+  });
+});
 
-      <div class="fragmento-card">
-        <p class="frase">"Eu amo tudo em você, mesmo as parte que você considera serem obscuras, e vergonhosas, cada cicatriz, cada falha, cada imperfeição. Eu. amo. você."<br><span class="autor">- Bridgerton</span></p>
-        <p class="explicacao">Amar é uma escolha e eu escolho te amar todos os dias, paixão pode ser algo passageiro, mas o amor sempre irá prevalecer e eu desejo que você seja meu último amor.</p>
-      </div>
+// === Playlist (mantida igual ao original) ===
+const playlist = [
+  { title: "Damiano - The First Time", id: "n1Hzf_is8tI" },
+  { title: "Cazuza - Exagerado", id: "KmVmoHg9zuU" },
+  { title: "Mitski - Washing Machine Heart", id: "3vjkh-acmTE" },
+  { title: "Billie Eilish - Birds of a Feather", id: "d5gf9dXbPi0" },
+  { title: "Billie Eilish - Wildflower", id: "l08Zw-RY__Q" },
+  { title: "Kamaitachi - Julieta", id: "qGCq4wrQhSg" },
+  { title: "Barão Vermelho - Por Você", id: "WRGcgkF1mK8" },
+  { title: "Tom Jobim - Eu Sei Que Vou Te Amar", id: "TARRNm0x1Iw" },
+  { title: "Jorge e Mateus - Pra Sempre com Você", id: "VWRkQARH-9o" },
+  { title: "Diego e Victor - Entregador de Flor", id: "TvgHPioJqAY" },
+  { title: "Luan Santana - Te Vivo", id: "iwBNAkU9wMk" },
+  { title: "Luan Santana - Tudo Que Você Quiser", id: "zF2I8IazFNo" },
+  { title: "AnaVitória e Lenine - Lisboa", id: "o3-lzz60iTQ" },
+  { title: "AnaVitória e Vitor Kley - Pupila", id: "9Sk7RQtSl5g" },
+  { title: "The Neighbourhood - Fall Star", id: "54kTO17-j_0" },
+  { title: "The Neighbourhood - Little Death", id: "LVqGRJLEj28" },
+  { title: "Damiano - Zombie Lady", id: "LP2nqXYwl6Q" },
+  { title: "Chris Grey - lifetime", id: "R6B0cnduVWE" },
+  { title: "Chris Grey - Burn The World", id: "SkcO47UDzzY" },
+  { title: "Fuji Kaze - Shinunoga E Wa", id: "dawrQnvwMTY" },
+  { title: "Guns N' Roses - Sweet Child O'Mine", id: "1w7OgIMMRc4" },
+  { title: "Avenged Sevenfold - Gunslinger", id: "cdKyzzm465Q" },
+  { title: "Guns N' Roses - This I Love", id: "vhvP905I-aQ" },
+  { title: "Slayer - Raining Blood", id: "CkaE237oiwE" },
+  { title: "AudioSlave - Like a Stone", id: "7QU1nvuxaMA" },
+  { title: "Sombr - Undressed", id: "z0wT6CrEGY" },
+  { title: "Luisa Sonza - Iguaria", id: "Y9KY4s8lIHA" },
+  { title: "Venere Vai Venus - Anjos", id: "mJjHVOv2bWI" },
+  { title: "Artic Monkeys - I Wanna Be Yours", id: "nyuo9-OjNNg" },
+  { title: "Lana Del Rey - Young And Beautiful", id: "o_1aF54DO60" },
+  { title: "Post Malone ft. Ozzy Osbourne, Travis Scott - Take What You Want", id: "LYa_ReqRlcs" },
+  { title: "Ozzy Osbourne - No More Tears", id: "CprfjfN5PRs" },
+  { title: "Goo Goo Dolls - Iris", id: "NdYWuo9OFAw" },
+  { title: "System of a Down - Lonely Day", id: "DnGdoEa1tPg" },
 
-     <div class="fragmento-card">
-        <p class="frase">"Porque Rin e Kitay estavam ligados de uma forma que ele nunca poderia entender e não havia um mundo onde Rin morresse e Kitay permanecesse vivo."<br><span class="autor">- A Guerra da Papoula</span></p>
-        <p class="explicacao">É a minha trilogia de livros favoritas se eu consigo pensar em uma frase desse livro para você é com certeza  eu te amo muito.</p>
-      </div>
+];
 
-     <div class="fragmento-card">
-        <p class="frase">"Sua mão é fria. A minha queima como fogo. Como você é cega, Nástienka."<br><span class="autor">- Noites Brancas</span></p>
-        <p class="explicacao">Não tem uma parte do meu corpo que não responda a sua mínima respiração, porque tenho a necessidade de te amar com todas as moléculas que compõem o meu ser.</p>
-      </div>
+let currentTrackIndex = 0;
+let player;
 
-    <div class="fragmento-card">
-        <p class="frase">"Eu serei todos os poetas, vou matar todos eles e tomar seus lugares um a um, assim toda vez que o amor for escrito, em todos os filamentos, será para você."<br><span class="autor">- É assim que se perde a guerra do tempo</span></p>
-        <p class="explicacao"> Se eu pudesse escreveria livros pelo resto da minha vida, se assim conseguisse retratar o que é o amor quando olho em seus olhos.</p>
-      </div>
+function renderPlaylist() {
+  playlistContainer.innerHTML = '';
+  playlist.forEach((track, index) => {
+    const btn = document.createElement('button');
+    btn.classList.add('track-button');
+    btn.textContent = track.title;
+    btn.onclick = () => {
+      currentTrackIndex = index;
+      loadTrack(currentTrackIndex);
+    };
+    playlistContainer.appendChild(btn);
+  });
+}
 
-   <div class="fragmento-card">
-        <p class="frase">"Não há limite para o que posso dar, não preciso de tempo. Mesmo quando este mundo for um sussurro de terra esquecido em meio ás estrelas, amarei você."<br><span class="autor">- Trono de Vidro</span></p>
-        <p class="explicacao">Tudo pode acabar mas meu amor por você ira permanecer até nos piores tempos.</p>
-      </div>
+function loadTrack(index) {
+  const track = playlist[index];
+  trackTitle.textContent = track.title;
+  if (player) {
+    player.loadVideoById(track.id);
+  } else {
+    player = new YT.Player('player-container', {
+      height: '90',
+      width: '100%',
+      videoId: track.id,
+      playerVars: {
+        autoplay: 1,
+        controls: 1,
+        rel: 0,
+        modestbranding: 1
+      },
+      events: {
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+}
 
-<div class="fragmento-card">
-        <p class="frase">"Eu te amo, eu não vim aqui para dizer que não posso viver sem você, eu posso viver sem você, só não gostaria."<br><span class="autor">- Dizem Por Aí</span></p>
-        <p class="explicacao">Saber que você foi uma escolha, me faz te amar ainda mais.</p>
-      </div>
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.ENDED) {
+    nextTrack();
+  }
+}
 
-<div class="fragmento-card">
-        <p class="frase">"Eu sei que podem existir universos por ai onde eu fiz escolhas diferentes e que me levaram a algum outro lugar, que me levaram a outra pessoa, e meu coração se parte por cada versão de mim que não terminou ao seu lado."<br><span class="autor">- Em outra vida talvez?</span></p>
-        <p class="explicacao">Eu.te.amo.</p>
-      </div>
+function nextTrack() {
+  currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+  loadTrack(currentTrackIndex);
+}
 
-    </div>
-</section>
+// === Carta Secreta ===
+const textoCarta = `Nunca fui boa em descrever o que sinto, muito menos em demonstrar. Mas com você, tudo flui de maneira tão leve que sinto a necessidade de expressar meu amor de forma incondicional — como se nunca houvesse momentos suficientes para isso. E talvez não haja mesmo, porque qualquer demonstração de amor parece pequena diante da grandiosidade que é te amar.
 
-  <!-- Página de Error:404 -->    
-  <section id="error-section" class="futuristic-section hidden" style="padding: 60px 20px;">    
-    <h1 class="error-code">ERROR:404</h1>
-    <p>Esse caminho ainda não está liberado, volte e crie mais memórias com a administradora.</p>    
-    <button class="neon-button" onclick="reiniciarSistema()">Reiniciar Sistema</button>
-  </section> 
+Não sou uma pessoa devota, tampouco religiosa. Nunca fui alguém que fantasiava com uma terra prometida. Na verdade, sempre desejei que não existisse nada após a morte — muito menos um paraíso. Sempre acreditei que a essência do ser humano pertence ao real, e não ao irreal que se veste de pureza. Mas, quando penso em você, tudo isso muda. Só desejo que exista uma outra vida, um outro plano... para que eu nunca precise me despedir de você. Você é o mais próximo de um paraíso que eu poderia ter, porque me faz sentir como se eu já estivesse em um. E se, por acaso, realmente existir um paraíso em outro plano — e você não estiver lá — então nunca será um paraíso.
 
-  <!-- Sons -->
-  <audio id="type-sound" src="https://www.soundjay.com/keyboard/sounds/keyboard-1.mp3" preload="auto"></audio>
-  <audio id="glitch-sound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+Desde o momento em que você surgiu, é como se eu tivesse uma doença que não cessa — apenas se fortalece. Tudo o que antes parecia chato se tornou aceitável. Depois, essencial. O que era esquisito ficou bonito aos meus olhos. E o que era complicado se transformou em um obstáculo pequeno, quase invisível. Tudo ganhou mais cor, como se a existência de um novo dia passasse a ter um sentido justificável.
 
-  <!-- Scripts -->
-  <script src="https://www.youtube.com/iframe_api"></script>    
-  <script src="script.js"></script>    
-</body>    
-</html>
+Eu soube que havia algo no instante em que olhei nos seus olhos e consegui enxergar a minha própria existência. No momento em que desejei que o tempo parasse — e não que ele passasse mais rápido. Quando fechei os olhos e senti que existia um lugar de conforto no mundo. Como num jogo, senti que tinha dado spawn no seu abraço.
+
+Às vezes penso que, em algum lugar, existe mesmo o fio vermelho do destino — e que, desde sempre, o meu estava amarrado ao seu. E por isso, cada dia que passa, cresce em mim a vontade de ser melhor, de ser alguém que esteja à altura de tudo o que você é, porque amar você me dá vontade de evoluir, de ser uma versão mais bonita de mim mesma.
+
+Eu te amo e amo o fato de você transformar todos os meus planos em nossos planos. Amo acordar e meu primeiro pensamento ser você, e encerrar o meu dia continuando sendo você. Amo cada parte do seu ser. E às vezes me pego pensando que, mesmo te dando tudo o que tenho, o amor que sinto por você ainda transborda… e dói um pouco saber que nunca vou conseguir colocar em palavras de maneira digna o quanto você significa pra mim.`;
+
+function iniciarCarta() {
+  const senha = prompt("Digite a senha para acessar a mensagem secreta:");
+  if (senha && senha.toLowerCase().trim() === "amor") {
+    cartaDigitada.innerText = "";
+    let i = 0;
+    function escrever() {
+      if (i < textoCarta.length) {
+        cartaDigitada.innerText += textoCarta.charAt(i);
+        i++;
+        setTimeout(escrever, 25);
+      }
+    }
+    escrever();
+  } else {
+    alert("Senha incorreta. Acesso negado.");
+  }
+}
+
+// === Estrelas ===
+const canvas = document.getElementById('star-canvas');
+const ctx = canvas.getContext('2d');
+let starsEnabled = false;
+let stars = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function createStars(count) {
+  stars = [];
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5,
+      speed: Math.random() * 0.5 + 0.2
+    });
+  }
+}
+
+function animateStars() {
+  if (!starsEnabled) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'white';
+  for (let star of stars) {
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fill();
+    star.y += star.speed;
+    if (star.y > canvas.height) {
+      star.y = 0;
+      star.x = Math.random() * canvas.width;
+    }
+  }
+  requestAnimationFrame(animateStars);
+}
+
+toggleStarsBtn.addEventListener('click', () => {
+  starsEnabled = !starsEnabled;
+  canvas.style.display = starsEnabled ? 'block' : 'none';
+  if (starsEnabled) {
+    createStars(150);
+    animateStars();
+  }
+});
+
+
+// === Mensagens de erro alternadas 
+// const errorMessages = ["Erro 404: Ausência detectada.", "Você não deveria estar aqui...", "Caminho inacessível. Tente mais amor."];
+// let currentErrorIndex = 0;
+// function rotateErrorMessages() {
+//   currentErrorIndex = (currentErrorIndex + 1) % errorMessages.length;
+//   errorMessage.textContent = errorMessages[currentErrorIndex];
+// }
+// setInterval(rotateErrorMessages, 6000);
+
+// === Reinício do sistema ===
+function reiniciarSistema() {
+  Object.values(sections).forEach(sec => {
+    if (sec === terminalContainer) {
+      sec.style.display = 'flex';
+    } else {
+      sec.classList.remove('active');
+    }
+  });
+  errorSection.classList.add('hidden');
+  terminalContainer.scrollIntoView({ behavior: 'smooth' });
+  toggleStarsBtn.style.display = 'none';
+}
+
+// Inicia o terminal
+typeLine();
